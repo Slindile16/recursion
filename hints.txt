@@ -1,0 +1,61 @@
+n % 10 -- includes the last digit
+n // 10 -- excludes the last digit
+
+s[-1] → last character
+s[:-1] → everything except last character\
+
+Important Pattern (REMEMBER THIS)
+Most recursion problems follow:
+
+if base_case:
+    return something
+
+return smaller_problem + recursive_call(...)
+
+def func(x):
+    if base_case:
+        return answer
+    
+    return something + func(smaller_input)
+
+✅ Key Points:
+
+Recursion works by solving smaller subproblems and building up the solution.
+
+Base case is critical to avoid infinite recursion.
+
+s[-1] always grabs the last character, and s[:-1] shortens the string for the next call.
+
+
+examples:
+def reverse_string(s):
+    if s == "":                 # base case
+        return ""
+    return s[-1] + reverse_string(s[:-1])
+# print(reverse_string("cat"))
+
+def sum_even(n):
+    if n <= 0:              # base case
+        return 0
+    if n % 2 == 0:          # if n is even
+        return n + sum_even(n - 1)
+    else:                   # if n is odd, skip
+        return sum_even(n - 1)
+print(sum_even(6))
+
+
+
+def reverse_num(n, rev=0):
+    if n == 0:            # base case
+        return rev
+    return reverse_num(n // 10, rev * 10 + n % 10)
+
+
+
+def count_vowels(s):
+    if s == "":          # base case
+        return 0
+    if s[0].lower() in "aeiou":
+        return 1 + count_vowels(s[1:])
+    else:
+        return count_vowels(s[1:])
